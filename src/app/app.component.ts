@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ITunesService } from './itunes.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private itunesService: ITunesService) {}
+
+  onSubmit(submittedForm) {
+    // console.log(submittedForm);
+    this.itunesService.GetSongs([])
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
+  }
 }
