@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/Rx';
 
+import { SearchParameters } from './searchParams';
+
 @Injectable()
 export class ITunesService {
 
@@ -9,12 +11,11 @@ export class ITunesService {
 
   constructor(private http: Http) {}
 
-  GetSongs(name: string) {
+  GetSongs(searchParams: SearchParameters) {
 
-    if (name !== '') {
-
-      name = name.split(' ').join('+');
-      this.searchURL = this.searchURL + 'term=' + name + '&limit=25';
+    if (searchParams) {
+      searchParams.term = searchParams.term.split(' ').join('+');
+      this.searchURL = this.searchURL + 'term=' + searchParams.term + '&limit=100';
     }
 
     return this.http.get(this.searchURL);
