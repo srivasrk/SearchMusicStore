@@ -4,9 +4,19 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class ITunesService {
+
+  searchURL = 'https://itunes.apple.com/search?';
+
   constructor(private http: Http) {}
 
-  GetSongs(names: any[]) {
-  return this.http.get('https://itunes.apple.com/search?term=jack+johnson&limit=25');
+  GetSongs(name: string) {
+
+    if (name !== '') {
+
+      name = name.split(' ').join('+');
+      this.searchURL = this.searchURL + 'term=' + name + '&limit=25';
+    }
+
+    return this.http.get(this.searchURL);
   }
 }

@@ -12,8 +12,8 @@ export class AppComponent {
   constructor(private itunesService: ITunesService) {}
 
   onSubmit(submittedForm) {
-    // console.log(submittedForm);
-    this.itunesService.GetSongs([])
+    console.log(submittedForm.value.artistName);
+    this.itunesService.GetSongs(submittedForm.value.artistName)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
