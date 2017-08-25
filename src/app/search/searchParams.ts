@@ -4,7 +4,7 @@ enum MediaEnum {
 
 export class SearchParameters {
   term: string;
-  media: MediaEnum;
+  // media: MediaEnum;
   callback: string;
   limit: number;
   explicit: boolean;

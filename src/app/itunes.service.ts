@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/Rx';
 
-import { SearchParameters } from './searchParams';
+import { SearchParameters } from './search/searchParams';
 
 @Injectable()
 export class ITunesService {

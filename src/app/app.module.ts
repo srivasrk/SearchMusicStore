@@ -6,10 +6,16 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ITunesService } from './itunes.service';
+import { HeaderComponent } from './header/header.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResultsComponent } from './search/search-results/search-results.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    SearchComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
