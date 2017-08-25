@@ -1,23 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/Rx';
+import { Observable } from 'rxjs/observable';
+import { Subject } from 'rxjs/Subject';
 
 import { SearchParameters } from './search/searchParams';
+
+import { SearchResult } from './search/searchResult';
 
 @Injectable()
 export class ITunesService {
 
-  searchURL = 'https://itunes.apple.com/search?';
+  searchBaseURL = 'https://itunes.apple.com/search?';
+  searchURL = '';
 
-  constructor(private http: Http) {}
+  searchResultsChange: Subject<SearchResult[]> = new Subject<SearchResult[]>();
+  searchResults: SearchResult[];
+
+  constructor(private http: Http) {
+    this.searchResults = new Array();
+  }
 
   GetSongs(searchParams: SearchParameters) {
 
     if (searchParams) {
       searchParams.term = searchParams.term.split(' ').join('+');
-      this.searchURL = this.searchURL + 'term=' + searchParams.term + '&limit=100';
+      this.searchURL = this.searchBaseURL + 'term=' + searchParams.term + '&limit=100';
     }
 
-    return this.http.get(this.searchURL);
+    this.http.get(this.searchURL)
+    .map((response: Response) => response.json())
+    .subscribe(
+      (data) => {
+        console.log(data.results);
+        this.searchResults.length = 0;
+        for (const res of data.results) {
+          this.searchResults.push(res);
+        }
+      // this.searchResultsChange.next(this.searchResults);
+      },
+    );
   }
 }

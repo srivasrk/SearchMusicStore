@@ -1,9 +1,12 @@
 <div class="list-group ">
-    <h2 *ngIf="searchResults != 0">Search Results</h2>
+    <h3 *ngIf="searchResults != 0">Search Results</h3>
     <div *ngFor="let res of searchResults; let i = index">
-        <a href="#" class="list-group-item active">
-            <h4 class="list-group-item-heading">First List Group Item Heading</h4>
-            <p class="list-group-item-text">{{i}} {{res.artistName}}</p>
+
+        <a href="{{res.trackViewUrl}}" class="list-group-item">
+            <h4 class="list-group-item-heading">Track Name: {{res.trackName}}</h4>
+            <p class="list-group-item-text">Artist: {{res.artistName}} ({{res.country}})</p>
+            <img src="{{res.artworkUrl60}}" alt="Preview" class="img-circle">
         </a>
+
     </div>
 </div>
