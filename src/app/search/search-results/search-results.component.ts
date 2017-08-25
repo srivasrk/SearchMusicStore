@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { SearchParameters } from '../searchParams';
 
+import { SearchResult } from '../searchResult';
+
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
@@ -9,7 +11,7 @@ import { SearchParameters } from '../searchParams';
 })
 export class SearchResultsComponent implements OnInit {
 
-  @Input() searchResults: SearchParameters[];
+  @Input() searchResults: SearchResult[];
 
   constructor() { }
 
