@@ -1,5 +1,9 @@
-<div class="list-group">
+<div class="list-group ">
+    <h2 *ngIf="searchResults != 0">Search Results</h2>
     <div *ngFor="let res of searchResults">
-        {{res.artistId}}
+        <a href="#" class="list-group-item active">
+            <h4 class="list-group-item-heading">First List Group Item Heading</h4>
+            <p class="list-group-item-text">List Group Item Text {{res.artistId}}</p>
+        </a>
     </div>
 </div>
