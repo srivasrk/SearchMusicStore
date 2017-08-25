@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Headers, Http, Response } from '@angular/http';
 import { ITunesService } from '../itunes.service';
 import { SearchParameters } from './searchParams';
 import { SearchResult } from './searchResult';
@@ -22,23 +23,21 @@ export class SearchComponent {
   }
 
   onSubmit(submittedForm) {
-    this.searchResult = {
-      artistId: 1,
-      collectionId: 1,
-      trackId: 1,
-      artistName: 'Rahul'
-    };
-
-    this.searchResults.push(this.searchResult);
-
     // Populate search params and pass to the service
     this.searchParams.term = submittedForm.value.artistName;
 
     console.log(submittedForm.value.artistName);
     console.log(this.searchParams.term);
     this.itunesService.GetSongs(this.searchParams)
+      .map((response: Response) => response.json())
       .subscribe(
-        (response) => console.log(response),
+        (data) => {
+          console.log(data.results);
+          console.log(data.resultCount);
+          for (const res of data.results) {
+            this.searchResults.push(res);
+          }
+        },
         (error) => console.log(error)
       );
   }
