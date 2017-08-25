@@ -25,7 +25,7 @@ export class ITunesService {
 
     if (searchParams) {
       searchParams.term = searchParams.term.split(' ').join('+');
-      this.searchURL = this.searchBaseURL + 'term=' + searchParams.term + '&limit=100';
+      this.searchURL = this.searchBaseURL + 'term=' + searchParams.term + '&limit=25';
     }
 
     this.http.get(this.searchURL)

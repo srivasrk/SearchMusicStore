@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 
 import { SearchParameters } from '../searchParams';
-
 import { SearchResult } from '../searchResult';
 import { ITunesService } from '../../itunes.service';
 
@@ -16,7 +16,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   searchResults: SearchResult[];
   _subscription;
 
-  constructor(private itunesService: ITunesService) {
+  constructor(private itunesService: ITunesService, @Inject(DOCUMENT) private document: Document) {
     this.searchResults = itunesService.searchResults;
 
     this._subscription = itunesService.searchResultsChange.subscribe((value) => {
@@ -28,6 +28,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
+  scrollToTop() {
+    console.log('clicked');
+    this.document.body.scrollTop = 0;
+  }
 
   ngOnDestroy() {
     // prevent memory leak when component destroyed

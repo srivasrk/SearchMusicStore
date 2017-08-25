@@ -5,6 +5,10 @@
             <input type="text" id="artistName" name="artistName" class="form-control" ngModel required #nameCtrl="ngModel">
             <span class="help-block" *ngIf="nameCtrl.invalid && nameCtrl.touched">Please enter a name!</span>
 
+            <label for="mediaType">Media Type</label>
+            <select class="form-control" data-style="btn-info" id="mediaType" name="mediaType">
+              <option *ngFor="let m of mediaType" [ngValue]="m"> {{m.type}} </option>
+            </select>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
         <!-- <button class="btn btn-primary" type="submit"> -->

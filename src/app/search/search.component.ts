@@ -12,6 +12,19 @@ export class SearchComponent {
 
   title = 'app';
   searchParams: SearchParameters;
+  mediaType = [
+    {'type': 'Movie'},
+    {'type': 'Podcast'},
+    {'type': 'Music'},
+    {'type': 'MusicVideo'},
+    {'type': 'Audiobook'},
+    {'type': 'ShortFilm'},
+    {'type': 'TvShow'},
+    {'type': 'Software'},
+    {'type': 'Ebook'},
+    {'type': 'All'}
+  ];
+  selectedMediaType = this.mediaType[1];
 
   constructor(private itunesService: ITunesService) {
     this.searchParams = new SearchParameters();
