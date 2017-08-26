@@ -1,9 +1,9 @@
 export class ArtistAnalyticsData {
-  ArtistName: 'string';
+  ArtistName: string;
   HitCount: number;
 }
 
 export class MediaAnalytics {
-  MediaType: 'string';
+  MediaType: string;
   HitCount: number;
 }
