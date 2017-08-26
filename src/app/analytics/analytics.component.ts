@@ -13,9 +13,9 @@ export class AnalyticsComponent implements OnDestroy {
 
   private _subscriptionArtists;
   private _subscriptionMedia;
-  artistAnalyticsData: ArtistAnalyticsData[];
-  mediaTypeAnalyticsData: MediaAnalytics[];
-  totalNumberOfClicks: number = 0;
+  artistAnalyticsData: ArtistAnalyticsData[] = [];
+  mediaTypeAnalyticsData: MediaAnalytics[] = [];
+  totalNumberOfClicks = 0;
 
   getAnalyticsData() {
 
@@ -23,10 +23,15 @@ export class AnalyticsComponent implements OnDestroy {
     .map((response: Response) => response.json())
     .subscribe(
       (data: ArtistAnalyticsData[]) => {
-        this.artistAnalyticsData = data;
 
-        for (const res of this.artistAnalyticsData) {
-          this.totalNumberOfClicks = this.totalNumberOfClicks + res.HitCount;
+        console.log(data);
+        if (data && data.length > 0) {
+          this.artistAnalyticsData = data;
+
+          console.log(data);
+          for (const res of data) {
+            this.totalNumberOfClicks = this.totalNumberOfClicks + res.HitCount;
+          }
         }
       }
     );
@@ -35,13 +40,17 @@ export class AnalyticsComponent implements OnDestroy {
     .map((response: Response) => response.json())
     .subscribe(
       (data: MediaAnalytics[]) => {
-        this.mediaTypeAnalyticsData = data;
-        console.log(this.mediaTypeAnalyticsData);
+        if (data && data.length > 0) {
+          this.mediaTypeAnalyticsData = data;
+        }
       }
     );
   }
 
   constructor(private analyticsService: AnalyticsService) {
+
+    // this.artistAnalyticsData = new Array();
+    // this.mediaTypeAnalyticsData = new Array();
 
     this._subscriptionArtists = this.analyticsService.analyticsArtistsDataChange.subscribe((value) => {
       this.artistAnalyticsData = value;

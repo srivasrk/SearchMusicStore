@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { SearchParameters } from '../searchParams';
 import { SearchResult } from '../searchResult';
 import { ITunesService } from '../../itunes.service';
+import { AnalyticsService } from '../../analytics/analytics.service';
 
 @Component({
   selector: 'app-search-results',
@@ -16,7 +17,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   searchResults: SearchResult[];
   _subscription;
 
-  constructor(private itunesService: ITunesService, @Inject(DOCUMENT) private document: Document) {
+  constructor(private itunesService: ITunesService,
+    private analyticsService: AnalyticsService, @Inject(DOCUMENT) private document: Document) {
 
     this.searchResults = itunesService.searchResults;
 
@@ -33,6 +35,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   scrollToTop() {
     console.log('clicked');
     this.document.body.scrollTop = 0;
+  }
+
+  UpdateAnalyticsData(searchResult: SearchResult) {
+    this.analyticsService.storeAnalyticsData(searchResult).subscribe(
+      data => console.log(data),
+      error => console.error(error)
+    );
   }
 
   ngOnDestroy() {
