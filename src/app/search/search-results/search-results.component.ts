@@ -17,13 +17,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   _subscription;
 
   constructor(private itunesService: ITunesService, @Inject(DOCUMENT) private document: Document) {
+
     this.searchResults = itunesService.searchResults;
 
     this._subscription = itunesService.searchResultsChange.subscribe((value) => {
       this.searchResults.length = 0;
       this.searchResults = value;
       console.log(value);
-    }); }
+    });
+  }
 
   ngOnInit() {
   }

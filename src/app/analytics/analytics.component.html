@@ -1,0 +1,39 @@
+<div class="well well-sm">
+  Total Number of clicks: 100
+</div>
+
+<table class="table  table-striped" name="artists-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Artist Name</th>
+      <th>Number Of Clicks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let res of artistAnalyticsData; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{res.ArtistName}}</td>
+      <td>{{res.HitCount}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped" name="media-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+  </tbody>
+</table>

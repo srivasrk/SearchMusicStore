@@ -9,13 +9,16 @@ import { ITunesService } from './itunes.service';
 import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
 import { SearchResultsComponent } from './search/search-results/search-results.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { AnalyticsService } from './analytics/analytics.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SearchComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { SearchResultsComponent } from './search/search-results/search-results.c
     FormsModule,
     HttpModule
   ],
-  providers: [ITunesService],
+  providers: [ITunesService, AnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
