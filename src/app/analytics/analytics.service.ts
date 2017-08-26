@@ -30,7 +30,7 @@ export class AnalyticsService {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.http.put('https://easy-tax-a8796.firebaseio.com/articles.json',
+    this.http.put('https://search-itunes-d32b5.firebaseio.com/artist-analytics-data.json',
                   body,
                   {headers: headers});
   }
