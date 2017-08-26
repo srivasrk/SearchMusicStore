@@ -3,7 +3,7 @@ export class ArtistAnalyticsData {
   HitCount: number;
 }
 
-export class MediaAnalytics {
+export class MediaAnalyticsData {
   MediaType: string;
   HitCount: number;
 }

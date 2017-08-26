@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 
 import { Headers, Http, Response } from '@angular/http';
 import { AnalyticsService } from './analytics.service';
-import { ArtistAnalyticsData, MediaAnalytics } from './analytics-data';
+import { ArtistAnalyticsData, MediaAnalyticsData } from './analytics-data';
 
 @Component({
   selector: 'app-analytics',
@@ -14,7 +14,7 @@ export class AnalyticsComponent implements OnDestroy {
   private _subscriptionArtists;
   private _subscriptionMedia;
   artistAnalyticsData: ArtistAnalyticsData[] = [];
-  mediaTypeAnalyticsData: MediaAnalytics[] = [];
+  mediaTypeAnalyticsData: MediaAnalyticsData[] = [];
   totalNumberOfClicks = 0;
 
   getAnalyticsData() {
@@ -22,15 +22,13 @@ export class AnalyticsComponent implements OnDestroy {
     this.analyticsService.getArtistsAnalyticsData()
     .map((response: Response) => response.json())
     .subscribe(
-      (data: ArtistAnalyticsData[]) => {
-
-        console.log(data);
-        if (data && data.length > 0) {
-          this.artistAnalyticsData = data;
-
-          console.log(data);
-          for (const res of data) {
-            this.totalNumberOfClicks = this.totalNumberOfClicks + res.HitCount;
+      (data) => {
+        if (data) {
+          for (const key in data) {
+            if (data[key]) {
+              this.artistAnalyticsData.push(data[key]);
+              this.totalNumberOfClicks = this.totalNumberOfClicks + data[key].HitCount;
+            }
           }
         }
       }
@@ -39,9 +37,13 @@ export class AnalyticsComponent implements OnDestroy {
     this.analyticsService.getMusicTypeAnalyticsData()
     .map((response: Response) => response.json())
     .subscribe(
-      (data: MediaAnalytics[]) => {
-        if (data && data.length > 0) {
-          this.mediaTypeAnalyticsData = data;
+      (data) => {
+        if (data) {
+          for (const key in data) {
+            if (data[key]) {
+              this.mediaTypeAnalyticsData.push(data[key]);
+            }
+          }
         }
       }
     );

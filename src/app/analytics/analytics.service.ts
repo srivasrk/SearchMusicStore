@@ -4,22 +4,20 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/observable';
 import { Subject } from 'rxjs/Subject';
 
-import { ArtistAnalyticsData, MediaAnalytics } from './analytics-data';
+import { ArtistAnalyticsData, MediaAnalyticsData } from './analytics-data';
 import { SearchResult } from '../search/searchResult';
 
 @Injectable()
 export class AnalyticsService {
 
   analyticsArtistsDataChange: Subject<ArtistAnalyticsData[]> = new Subject<ArtistAnalyticsData[]>();
-  mediaTypeAnalyticsDataChange: Subject<MediaAnalytics[]> = new Subject<MediaAnalytics[]>();
+  mediaTypeAnalyticsDataChange: Subject<MediaAnalyticsData[]> = new Subject<MediaAnalyticsData[]>();
   artistAnalyticsData: ArtistAnalyticsData;
+  mediaAnalyticsData: MediaAnalyticsData;
 
   constructor(private http: Http) {}
 
   storeAnalyticsData(searchResult: SearchResult) {
-    // 1. Store the artist name
-    // 2. Store the type of content
-    // 3. Store number of clicks
 
     this.artistAnalyticsData = new ArtistAnalyticsData();
     this.artistAnalyticsData.ArtistName = searchResult.artistName;
