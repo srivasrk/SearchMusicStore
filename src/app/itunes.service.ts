@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/observable';
 import { Subject } from 'rxjs/Subject';
 
 import { SearchParameters } from './search/searchParams';
-
 import { SearchResult } from './search/searchResult';
 
 @Injectable()
