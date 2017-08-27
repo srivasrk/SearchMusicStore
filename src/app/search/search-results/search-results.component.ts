@@ -28,7 +28,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this._subscription = itunesService.searchResultsChange.subscribe((value) => {
       this.searchResults.length = 0;
       this.searchResults = value;
-      console.log(value);
     });
   }
 

@@ -12,16 +12,17 @@ export class SearchComponent {
   title = 'app';
   searchParams: SearchParameters;
   mediaType = [
-    {'type': 'movie'},
-    {'type': 'podcast'},
-    {'type': 'music'},
-    {'type': 'musicVideo'},
-    {'type': 'audiobook'},
-    {'type': 'shortFilm'},
-    {'type': 'tvShow'},
-    {'type': 'software'},
-    {'type': 'ebook'},
-    {'type': 'all'}
+    {display: 'Select type', value: ''},
+    {display: 'Movie', value: 'movie'},
+    {display: 'Podcast', value: 'podcast'},
+    {display: 'Music', value: 'music'},
+    {display: 'Music Video', value: 'musicVideo'},
+    {display: 'Audiobook', value: 'audiobook'},
+    {display: 'Short Film', value: 'shortFilm'},
+    {display: 'TV Show', value: 'tvShow'},
+    {display: 'Software', value: 'software'},
+    {display: 'EBook', value: 'ebook'},
+    {display: 'All', value: 'all'}
   ];
 
   constructor(private itunesService: ITunesService) {

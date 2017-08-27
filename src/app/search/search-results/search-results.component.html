@@ -1,11 +1,15 @@
 <div class="list-group" name="top">
-    <h3 *ngIf="searchResults != 0">Search Results</h3>
+  <br>
+    <div class="well well-sm" *ngIf="searchResults.length != 0">
+        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+        Search Results</div>
     <div *ngFor="let res of searchResults; let i = index">
       <!-- href="{{res.trackViewUrl}}" -->
         <a  class="list-group-item" (click)="UpdateAnalyticsData(res)">
-            <h4 class="list-group-item-heading">Track Name: {{res.trackName}}</h4>
+            <img src="{{res.artworkUrl60}}" alt="Preview" class="img-circle pull-right">
+            <h4 class="list-group-item-heading">{{res.trackName}}</h4>
             <p class="list-group-item-text">Artist: {{res.artistName}} ({{res.country}})</p>
-            <img src="{{res.artworkUrl60}}" alt="Preview" class="img-circle">
+            <p class="list-group-item-text">Type: {{res.kind}}</p>
         </a>
     </div>
     <button class="btn pull-right" *ngIf="searchResults.length >= 10" (click)="scrollToTop()">

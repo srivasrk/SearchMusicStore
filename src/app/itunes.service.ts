@@ -24,12 +24,13 @@ export class ITunesService {
   GetSongs(searchParams: SearchParameters) {
 
     if (searchParams) {
-      searchParams.term = searchParams.term.split(' ').join('+');
-      if (searchParams.term) {
+      if (searchParams.term.length > 0) {
+        searchParams.term = searchParams.term.split(' ').join('+');
         this.searchURL = this.searchBaseURL + 'term=' + searchParams.term;
       }
-      if (searchParams.media) {
-        this.searchURL = this.searchBaseURL + '&entity=' + searchParams.term;
+      if (searchParams.media.length > 0) {
+        searchParams.media = searchParams.media.split(' ').join('+');
+        this.searchURL = this.searchURL + '&entity=' + searchParams.media;
       }
       this.searchURL = this.searchURL + '&limit=25';
     }
@@ -38,12 +39,10 @@ export class ITunesService {
     .map((response: Response) => response.json())
     .subscribe(
       (data) => {
-        console.log(data.results);
         this.searchResults.length = 0;
         for (const res of data.results) {
           this.searchResults.push(res);
         }
-      // this.searchResultsChange.next(this.searchResults);
       },
     );
   }

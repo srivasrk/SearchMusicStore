@@ -3,11 +3,12 @@
     <div class="form-group">
         <label for="name">Artist Name</label>
         <input type="text" id="artistName" name="artistName" class="form-control" ngModel required #nameCtrl="ngModel">
-        <span class="help-block" *ngIf="nameCtrl.invalid && nameCtrl.touched">Please enter a name!</span>
-
+        <br>
         <label for="mediaType">Media Type</label>
-        <select class="form-control" data-style="btn-info" id="mediaType" name="mediaType">
-          <option *ngFor="let m of mediaType" [ngValue]="m"> {{m.type}} </option>
+        <select class="form-control" id="mediaType" name="mediaType" required ngModel #nameCtrl="ngModel">
+          <option *ngFor="let option of mediaType" [value]="option.value">
+              {{option.display}}
+          </option>
         </select>
     </div>
     <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
