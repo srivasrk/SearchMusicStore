@@ -1,22 +1,19 @@
-<div class="container">
-    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-        <div class="form-group">
-            <label for="name">Artist Name</label>
-            <input type="text" id="artistName" name="artistName" class="form-control" ngModel required #nameCtrl="ngModel">
-            <span class="help-block" *ngIf="nameCtrl.invalid && nameCtrl.touched">Please enter a name!</span>
 
-            <label for="mediaType">Media Type</label>
-            <select class="form-control" data-style="btn-info" id="mediaType" name="mediaType">
-              <option *ngFor="let m of mediaType" [ngValue]="m"> {{m.type}} </option>
-            </select>
-        </div>
-        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
-        <!-- <button class="btn btn-primary" type="submit"> -->
-          Search
-        </button>
-    </form>
-</div>
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="form-group">
+        <label for="name">Artist Name</label>
+        <input type="text" id="artistName" name="artistName" class="form-control" ngModel required #nameCtrl="ngModel">
+        <span class="help-block" *ngIf="nameCtrl.invalid && nameCtrl.touched">Please enter a name!</span>
 
-<div class="container">
-    <app-search-results></app-search-results>
-</div>
+        <label for="mediaType">Media Type</label>
+        <select class="form-control" data-style="btn-info" id="mediaType" name="mediaType">
+          <option *ngFor="let m of mediaType" [ngValue]="m"> {{m.type}} </option>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+    <!-- <button class="btn btn-primary" type="submit"> -->
+      Search
+    </button>
+</form>
+<app-search-results></app-search-results>
+

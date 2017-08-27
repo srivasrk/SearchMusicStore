@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ITunesService } from './itunes.service';
@@ -13,6 +14,11 @@ import { SearchComponent } from './search/search.component';
 import { SearchResultsComponent } from './search/search-results/search-results.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { AnalyticsService } from './analytics/analytics.service';
+
+const routes: Routes = [
+  { path: '', component: SearchComponent },
+  { path: 'analytics', component: AnalyticsComponent }
+]
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyBp7LAPSnLpAFdCuyBJ84pZH5bvdikPKls',
@@ -36,7 +42,8 @@ export const firebaseConfig = {
     CommonModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    RouterModule.forRoot(routes)
   ],
   providers: [ITunesService, AnalyticsService, AngularFireDatabase],
   bootstrap: [AppComponent]
