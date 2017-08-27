@@ -2,9 +2,13 @@
   <br>
     <div class="well well-sm" *ngIf="searchResults.length != 0">
         <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-        Search Results</div>
+        Search Results
+    </div>
+    <div *ngIf="searchResults.length === 0">
+        . . .
+    </div>
     <div *ngFor="let res of searchResults; let i = index">
-        <a href="{{res.trackViewUrl}}" class="list-group-item" (click)="UpdateAnalyticsData(res)">
+        <a href="{{res.trackViewUrl}}"  target="_blank" class="list-group-item" (click)="UpdateAnalyticsData(res)">
             <img src="{{res.artworkUrl60}}" alt="Preview" class="img-circle pull-right">
             <h4 class="list-group-item-heading">{{res.trackName}}</h4>
             <p class="list-group-item-text">Artist: {{res.artistName}} ({{res.country}})</p>
