@@ -17,8 +17,9 @@ import { AnalyticsService } from './analytics/analytics.service';
 
 const routes: Routes = [
   { path: '', component: SearchComponent },
-  { path: 'analytics', component: AnalyticsComponent }
-]
+  { path: 'analytics', component: AnalyticsComponent },
+  { path: '**', redirectTo: '/' }
+];
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyBp7LAPSnLpAFdCuyBJ84pZH5bvdikPKls',

@@ -6,13 +6,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Search iTunes</a>
+      <a class="navbar-brand" routerLink="/">Search iTunes</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Search</a></li>
-        <li><a href="#">Analytics</a></li>
-        <li><a href="#">Coming soon ...</a></li>
+        <li>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            Search
+          </a></li>
+        <li>
+          <a routerLink="/analytics" routerLinkActive="active">
+            Analytics
+          </a></li>
       </ul>
     </div>
   </div>
