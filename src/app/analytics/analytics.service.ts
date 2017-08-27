@@ -1,46 +1,57 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/Rx';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { FirebaseListObservable, FirebaseObjectObservable, AngularFireDatabase } from 'angularfire2/database';
 
 import { ArtistAnalyticsData, MediaAnalyticsData } from './analytics-data';
 import { SearchResult } from '../search/searchResult';
+
 
 @Injectable()
 export class AnalyticsService {
 
   analyticsArtistsDataChange: Subject<ArtistAnalyticsData[]> = new Subject<ArtistAnalyticsData[]>();
   mediaTypeAnalyticsDataChange: Subject<MediaAnalyticsData[]> = new Subject<MediaAnalyticsData[]>();
-  artistAnalyticsData: ArtistAnalyticsData;
-  mediaAnalyticsData: MediaAnalyticsData;
+  todos$: FirebaseListObservable<any[]>;
 
-  constructor(private http: Http) {}
+  private baseArtistsPath = '/artist-analytics-data';
+  private baseMediaPath = '/media-type-analytics-data';
+  artistsAnalyticsItems: FirebaseListObservable<ArtistAnalyticsData[]> = null; //  list of objects
+  mediaAnalyticsItems: FirebaseListObservable<MediaAnalyticsData[]> = null; //  list of objects
 
-  storeAnalyticsData(searchResult: SearchResult) {
+  constructor(private http: Http, private af: AngularFireDatabase) {}
 
-    this.artistAnalyticsData = new ArtistAnalyticsData();
-    this.artistAnalyticsData.ArtistName = searchResult.artistName;
-    this.artistAnalyticsData.HitCount = 1;
+  updateArtistsAnalyticsData(data) {
+    this.artistsAnalyticsItems.update(data.$key, data);
+  }
 
-    const body = JSON.stringify(this.artistAnalyticsData);
+  addArtistsAnalyticsData(searchResult: SearchResult) {
+    this.artistsAnalyticsItems.push({ArtistName: searchResult.artistName, HitCount: 1});
+  }
 
-    const headers = new Headers({
-      'Content-Type': 'application/json'
+  updateMediaAnalyticsData(data) {
+    console.log('update: ' + data);
+    this.mediaAnalyticsItems.update(data.$key, data);
+  }
+
+  addMediaAnalyticsData(searchResult: SearchResult) {
+    console.log('add: ' + searchResult);
+    this.mediaAnalyticsItems.push({MediaType: searchResult.kind, HitCount: 1});
+  }
+
+  getArtistsAnalyticsData(query = {}): FirebaseListObservable<ArtistAnalyticsData[]> {
+    this.artistsAnalyticsItems = this.af.list(this.baseArtistsPath, {
+      query: query
     });
-    return this.http.post('https://search-itunes-d32b5.firebaseio.com/artist-analytics-data.json',
-                  body,
-                  {headers: headers});
+    return this.artistsAnalyticsItems;
   }
 
-  getArtistsAnalyticsData() {
-    // Get Artist names,
-    return this.http.get('https://search-itunes-d32b5.firebaseio.com/artist-analytics-data.json');
+  getMediaAnalyticsData(query = {}): FirebaseListObservable<MediaAnalyticsData[]> {
+    this.mediaAnalyticsItems = this.af.list(this.baseMediaPath, {
+      query: query
+    });
+    return this.mediaAnalyticsItems;
   }
-
-  getMusicTypeAnalyticsData() {
-    // Get Media types,
-    return this.http.get('https://search-itunes-d32b5.firebaseio.com/media-type-analytics-data.json');
-  }
-
 }

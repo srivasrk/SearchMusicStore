@@ -25,7 +25,13 @@ export class ITunesService {
 
     if (searchParams) {
       searchParams.term = searchParams.term.split(' ').join('+');
-      this.searchURL = this.searchBaseURL + 'term=' + searchParams.term + '&limit=25';
+      if (searchParams.term) {
+        this.searchURL = this.searchBaseURL + 'term=' + searchParams.term;
+      }
+      if (searchParams.media) {
+        this.searchURL = this.searchBaseURL + '&entity=' + searchParams.term;
+      }
+      this.searchURL = this.searchURL + '&limit=25';
     }
 
     this.http.get(this.searchURL)

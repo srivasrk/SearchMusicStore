@@ -1,10 +1,10 @@
-enum MediaEnum {
-  Movie, Podcast, Music, MusicVideo, Audiobook, ShortFilm, TvShow, Software, Ebook, All
-}
+// enum MediaEnum {
+//   Movie, Podcast, Music, MusicVideo, Audiobook, ShortFilm, TvShow, Software, Ebook, All
+// }
 
 export class SearchParameters {
   term: string;
-  // media: MediaEnum;
+  media: string;
   callback: string;
   limit: number;
   explicit: boolean;

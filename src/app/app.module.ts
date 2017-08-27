@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { AppComponent } from './app.component';
 import { ITunesService } from './itunes.service';
@@ -11,6 +13,15 @@ import { SearchComponent } from './search/search.component';
 import { SearchResultsComponent } from './search/search-results/search-results.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { AnalyticsService } from './analytics/analytics.service';
+
+export const firebaseConfig = {
+  apiKey: 'AIzaSyBp7LAPSnLpAFdCuyBJ84pZH5bvdikPKls',
+  authDomain: 'search-itunes-d32b5.firebaseapp.com',
+  databaseURL: 'https://search-itunes-d32b5.firebaseio.com',
+  storageBucket: 'search-itunes-d32b5.appspot.com',
+  messagingSenderId: '1094408838311'
+};
+
 
 @NgModule({
   declarations: [
@@ -24,9 +35,10 @@ import { AnalyticsService } from './analytics/analytics.service';
     BrowserModule,
     CommonModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [ITunesService, AnalyticsService],
+  providers: [ITunesService, AnalyticsService, AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

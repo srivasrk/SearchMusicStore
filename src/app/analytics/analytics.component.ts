@@ -16,14 +16,16 @@ export class AnalyticsComponent implements OnDestroy {
   artistAnalyticsData: ArtistAnalyticsData[] = [];
   mediaTypeAnalyticsData: MediaAnalyticsData[] = [];
   totalNumberOfClicks = 0;
+  artistData: ArtistAnalyticsData;
+  mediaData: MediaAnalyticsData;
 
   getAnalyticsData() {
 
     this.analyticsService.getArtistsAnalyticsData()
-    .map((response: Response) => response.json())
     .subscribe(
       (data) => {
         if (data) {
+          this.artistAnalyticsData.length = 0;
           for (const key in data) {
             if (data[key]) {
               this.artistAnalyticsData.push(data[key]);
@@ -34,11 +36,11 @@ export class AnalyticsComponent implements OnDestroy {
       }
     );
 
-    this.analyticsService.getMusicTypeAnalyticsData()
-    .map((response: Response) => response.json())
+    this.analyticsService.getMediaAnalyticsData()
     .subscribe(
       (data) => {
         if (data) {
+          this.mediaTypeAnalyticsData.length = 0;
           for (const key in data) {
             if (data[key]) {
               this.mediaTypeAnalyticsData.push(data[key]);

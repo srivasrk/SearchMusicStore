@@ -13,16 +13,16 @@ export class SearchComponent {
   title = 'app';
   searchParams: SearchParameters;
   mediaType = [
-    {'type': 'Movie'},
-    {'type': 'Podcast'},
-    {'type': 'Music'},
-    {'type': 'MusicVideo'},
-    {'type': 'Audiobook'},
-    {'type': 'ShortFilm'},
-    {'type': 'TvShow'},
-    {'type': 'Software'},
-    {'type': 'Ebook'},
-    {'type': 'All'}
+    {'type': 'movie'},
+    {'type': 'podcast'},
+    {'type': 'music'},
+    {'type': 'musicVideo'},
+    {'type': 'audiobook'},
+    {'type': 'shortFilm'},
+    {'type': 'tvShow'},
+    {'type': 'software'},
+    {'type': 'ebook'},
+    {'type': 'all'}
   ];
   selectedMediaType = this.mediaType[1];
 
@@ -33,9 +33,7 @@ export class SearchComponent {
   onSubmit(submittedForm) {
     // Populate search params and pass to the service
     this.searchParams.term = submittedForm.value.artistName;
-
-    console.log(submittedForm.value.artistName);
-    console.log(this.searchParams.term);
+    this.searchParams.media = submittedForm.value.mediaType;
     this.itunesService.GetSongs(this.searchParams);
   }
 }
