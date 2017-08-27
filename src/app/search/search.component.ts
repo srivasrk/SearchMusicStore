@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
 import { ITunesService } from '../itunes.service';
 import { SearchParameters } from './searchParams';
 
@@ -24,7 +23,6 @@ export class SearchComponent {
     {'type': 'ebook'},
     {'type': 'all'}
   ];
-  selectedMediaType = this.mediaType[1];
 
   constructor(private itunesService: ITunesService) {
     this.searchParams = new SearchParameters();

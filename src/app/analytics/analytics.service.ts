@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -12,16 +11,12 @@ import { SearchResult } from '../search/searchResult';
 @Injectable()
 export class AnalyticsService {
 
-  analyticsArtistsDataChange: Subject<ArtistAnalyticsData[]> = new Subject<ArtistAnalyticsData[]>();
-  mediaTypeAnalyticsDataChange: Subject<MediaAnalyticsData[]> = new Subject<MediaAnalyticsData[]>();
-  todos$: FirebaseListObservable<any[]>;
-
   private baseArtistsPath = '/artist-analytics-data';
   private baseMediaPath = '/media-type-analytics-data';
   artistsAnalyticsItems: FirebaseListObservable<ArtistAnalyticsData[]> = null; //  list of objects
   mediaAnalyticsItems: FirebaseListObservable<MediaAnalyticsData[]> = null; //  list of objects
 
-  constructor(private http: Http, private af: AngularFireDatabase) {}
+  constructor(private af: AngularFireDatabase) {}
 
   updateArtistsAnalyticsData(data) {
     this.artistsAnalyticsItems.update(data.$key, data);
@@ -32,12 +27,10 @@ export class AnalyticsService {
   }
 
   updateMediaAnalyticsData(data) {
-    console.log('update: ' + data);
     this.mediaAnalyticsItems.update(data.$key, data);
   }
 
   addMediaAnalyticsData(searchResult: SearchResult) {
-    console.log('add: ' + searchResult);
     this.mediaAnalyticsItems.push({MediaType: searchResult.kind, HitCount: 1});
   }
 

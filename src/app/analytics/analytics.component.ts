@@ -1,6 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
 import { AnalyticsService } from './analytics.service';
 import { ArtistAnalyticsData, MediaAnalyticsData } from './analytics-data';
 
@@ -9,7 +8,7 @@ import { ArtistAnalyticsData, MediaAnalyticsData } from './analytics-data';
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.css']
 })
-export class AnalyticsComponent implements OnDestroy {
+export class AnalyticsComponent {
 
   private _subscriptionArtists;
   private _subscriptionMedia;
@@ -52,25 +51,6 @@ export class AnalyticsComponent implements OnDestroy {
   }
 
   constructor(private analyticsService: AnalyticsService) {
-
-    // this.artistAnalyticsData = new Array();
-    // this.mediaTypeAnalyticsData = new Array();
-
-    this._subscriptionArtists = this.analyticsService.analyticsArtistsDataChange.subscribe((value) => {
-      this.artistAnalyticsData = value;
-    });
-
-    this._subscriptionMedia = this.analyticsService.mediaTypeAnalyticsDataChange.subscribe((value) => {
-      this.mediaTypeAnalyticsData = value;
-    });
-
     this.getAnalyticsData();
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak when component destroyed
-      this._subscriptionArtists.unsubscribe();
-      this._subscriptionMedia.unsubscribe();
-
   }
 }
