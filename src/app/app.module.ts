@@ -21,12 +21,13 @@ const routes: Routes = [
   { path: '**', redirectTo: '/' }
 ];
 
+// Replace this with correct firebase config
 export const firebaseConfig = {
-  apiKey: 'AIzaSyBp7LAPSnLpAFdCuyBJ84pZH5bvdikPKls',
-  authDomain: 'search-itunes-d32b5.firebaseapp.com',
-  databaseURL: 'https://search-itunes-d32b5.firebaseio.com',
-  storageBucket: 'search-itunes-d32b5.appspot.com',
-  messagingSenderId: '1094408838311'
+  apiKey: '*',
+  authDomain: '*',
+  databaseURL: '*',
+  storageBucket: '*',
+  messagingSenderId: '*'
 };
 
 
