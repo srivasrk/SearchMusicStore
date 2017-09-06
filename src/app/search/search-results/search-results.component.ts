@@ -91,7 +91,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.mediaAnalyticsData[key].HitCount = this.mediaAnalyticsData[key].HitCount + 1;
         this.analyticsService.updateMediaAnalyticsData(this.mediaAnalyticsData[key]);
         this.found = true;
-        // break;
+        break;
       }
     }
 
