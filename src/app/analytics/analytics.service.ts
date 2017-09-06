@@ -35,16 +35,12 @@ export class AnalyticsService {
   }
 
   getArtistsAnalyticsData(query = {}): FirebaseListObservable<ArtistAnalyticsData[]> {
-    this.artistsAnalyticsItems = this.af.list(this.baseArtistsPath, {
-      query: query
-    });
+    this.artistsAnalyticsItems = this.af.list(this.baseArtistsPath, { query: query });
     return this.artistsAnalyticsItems;
   }
 
   getMediaAnalyticsData(query = {}): FirebaseListObservable<MediaAnalyticsData[]> {
-    this.mediaAnalyticsItems = this.af.list(this.baseMediaPath, {
-      query: query
-    });
+    this.mediaAnalyticsItems = this.af.list(this.baseMediaPath, { query: query });
     return this.mediaAnalyticsItems;
   }
 }

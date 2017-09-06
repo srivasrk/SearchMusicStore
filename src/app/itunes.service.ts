@@ -31,7 +31,7 @@ export class ITunesService {
         searchParams.media = searchParams.media.split(' ').join('+');
         this.searchURL = this.searchURL + '&media=' + searchParams.media;
       }
-      this.searchURL = this.searchURL + '&limit=25';
+      this.searchURL = this.searchURL + '&limit=30';
     }
 
     this.http.get(this.searchURL)
@@ -43,6 +43,7 @@ export class ITunesService {
           this.searchResults.push(res);
         }
       },
+      (error) => console.log(error)
     );
   }
 }
