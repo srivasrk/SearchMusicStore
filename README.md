@@ -4,6 +4,7 @@ The application is hosted here: [Search Music Store](http://searchmusicstore.s3-
 
 ## Development server
 
+Remember to update firebase config object in index.html and app.module.ts
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## About
