@@ -1,6 +1,6 @@
 # Search Music Store
 
-The application is hosted here: [Search Music Store](http://searchitunes.s3-website-us-east-1.amazonaws.com/)
+The application is hosted here: [Search Music Store](http://searchmusicstore.s3-website-us-east-1.amazonaws.com)
 
 ## Development server
 
