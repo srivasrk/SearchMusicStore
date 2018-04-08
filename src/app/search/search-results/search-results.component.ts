@@ -32,15 +32,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-  }
 
-  scrollToTop() {
-    console.log('clicked');
-    this.document.body.scrollTop = 0;
-  }
-
-  private updateArtistsAnalyticsData(searchResult: SearchResult) {
-
+    // Get the artists analytics data
     this.analyticsService.getArtistsAnalyticsData()
     .subscribe(
       (data) => {
@@ -55,22 +48,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.found = false;
-    for (const key in this.artistAnalyticsData) {
-      if (this.artistAnalyticsData[key].ArtistName === searchResult.artistName) {
-        this.artistAnalyticsData[key].HitCount = this.artistAnalyticsData[key].HitCount + 1;
-        this.analyticsService.updateArtistsAnalyticsData(this.artistAnalyticsData[key]);
-        this.found = true;
-      }
-    }
-
-    if (!this.found) {
-      this.analyticsService.addArtistsAnalyticsData(searchResult);
-    }
-  }
-
-  private updateMediaAnalyticsData(searchResult: SearchResult) {
-
+    // Get the media analytics data
     this.analyticsService.getMediaAnalyticsData()
     .subscribe(
       (data) => {
@@ -84,14 +62,38 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         }
       }
     );
+  }
+
+  scrollToTop() {
+    this.document.body.scrollTop = 0;
+  }
+
+  private updateArtistsAnalyticsData(searchResult: SearchResult) {
+
+    this.found = false;
+    for (const key in this.artistAnalyticsData) {
+      if (this.artistAnalyticsData[key].ArtistName === searchResult.artistName) {
+        this.artistAnalyticsData[key].HitCount++;
+        this.analyticsService.updateArtistsAnalyticsData(this.artistAnalyticsData[key]);
+        this.found = true;
+      }
+    }
+
+    if (!this.found) {
+      this.analyticsService.addArtistsAnalyticsData(searchResult);
+    }
+  }
+
+  private updateMediaAnalyticsData(searchResult: SearchResult) {
 
     this.found = false;
     for (const key in this.mediaAnalyticsData) {
       if (this.mediaAnalyticsData[key].MediaType === searchResult.kind) {
-        this.mediaAnalyticsData[key].HitCount = this.mediaAnalyticsData[key].HitCount + 1;
+        this.mediaAnalyticsData[key].HitCount++;
         this.analyticsService.updateMediaAnalyticsData(this.mediaAnalyticsData[key]);
         this.found = true;
-        // break;
+        break;
+      } else {
       }
     }
 

@@ -29,7 +29,7 @@ export class ITunesService {
       }
       if (searchParams.media.length > 0) {
         searchParams.media = searchParams.media.split(' ').join('+');
-        this.searchURL = this.searchURL + '&entity=' + searchParams.media;
+        this.searchURL = this.searchURL + '&media=' + searchParams.media;
       }
       this.searchURL = this.searchURL + '&limit=25';
     }
@@ -43,6 +43,7 @@ export class ITunesService {
           this.searchResults.push(res);
         }
       },
+      (error) => console.log(error)
     );
   }
 }

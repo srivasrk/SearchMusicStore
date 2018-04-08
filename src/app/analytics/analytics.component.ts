@@ -14,7 +14,7 @@ export class AnalyticsComponent {
   private _subscriptionMedia;
   artistAnalyticsData: ArtistAnalyticsData[] = [];
   mediaTypeAnalyticsData: MediaAnalyticsData[] = [];
-  totalNumberOfClicks = 0;
+  totalNumberOfClicks: number;
   artistData: ArtistAnalyticsData;
   mediaData: MediaAnalyticsData;
 
@@ -25,10 +25,11 @@ export class AnalyticsComponent {
       (data) => {
         if (data) {
           this.artistAnalyticsData.length = 0;
+          this.totalNumberOfClicks = 0;
           for (const key in data) {
             if (data[key]) {
               this.artistAnalyticsData.push(data[key]);
-              this.totalNumberOfClicks = this.totalNumberOfClicks + data[key].HitCount;
+              this.totalNumberOfClicks = data[key].HitCount + this.totalNumberOfClicks;
             }
           }
         }
@@ -51,6 +52,7 @@ export class AnalyticsComponent {
   }
 
   constructor(private analyticsService: AnalyticsService) {
+    this.totalNumberOfClicks = 0;
     this.getAnalyticsData();
   }
 }
